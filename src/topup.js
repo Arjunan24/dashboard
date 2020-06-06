@@ -2,27 +2,41 @@ import React from 'react';
 import {
  
   View,
-  Image
-  
+  Text,
+  Image,
+  StyleSheet
 } from 'react-native';
-import logo from "./Images/undraw_under_construction_46pa.png"
+import logo from "./assets/undraw_under_construction_46pa.png"
 
   function TopUp () {
     return(
-      <View>
-        {/* <Image 
-        //source={require(logo)}
-        style={{width:"50%",height:"50%"}}
-         source={{
-            uri: "./Images/undraw_under_construction_46pa.png",
-          }}
-        /> */}
-
-<Image source = {{uri: "./Images/undraw_under_construction_46pa.png"}}
-   style = {{ width: 200, height: 200 }}
-   />
+      <View style={styles.container}>
+    
+<Image
+          source={require("./assets/undraw_under_construction_46pa.png")}
+          style={styles.image}
+        />
+        <Text style={styles.text}>Under Construction...</Text>
         </View>
     )
   }
+  const styles = StyleSheet.create({
+      container:{
+flex:1,
+justifyContent:"center",
+alignItems:"center"
+      },
+      text:{
+          fontFamily:"Roboto",
+          fontSize:18
+      },
+    image: {
+        //flex:1,
+        width: '90%',
+        height: '80%',
+       // padding:"5%",
+       // paddingHorizontal:
+      },
+  });
   export default TopUp
   
