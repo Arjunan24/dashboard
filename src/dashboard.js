@@ -1,6 +1,18 @@
 import * as React from 'react';
 import { View,Text, StyleSheet, Dimensions,ScrollView,FlatList } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
+import {
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+  } from "react-native-chart-kit";
+
+import MaterialbarChart from "react-native-vector-icons/AntDesign"
+import MaterialLinerChart from "react-native-vector-icons/MaterialCommunityIcons"
+
 const elecData=[
     {
     electricityNumber:"ElONO62679",
@@ -43,6 +55,29 @@ const elecData=[
     price:"-R25.3"
    },
 ]
+
+//map data
+const screenWidth = Dimensions.get("window").width;
+const data = {
+    labels: ["January", "February", "March", "April", "May", "June"],
+    datasets: [
+      {
+        data: [20, 45, 28, 80, 99, 43]
+      }
+    ]
+  };
+
+  const chartConfig = {
+    backgroundGradientFrom: "#1E2923",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: "#08130D",
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false // optional
+  };
+
 const FirstRoute = () => {  
     return(
       <View  style={styles.container}>
@@ -119,7 +154,23 @@ const SecondRoute = () => {
    const ThirdRoute =()=>{
        return(
            <View>
-               <Text>Coming soon</Text>
+               <Text style={styles.getcustomsText}>Consumption- ELONO62679</Text>
+               <View style={styles.chartHeader}>
+<MaterialbarChart name="barschart" style={styles.chartImg}/>
+<MaterialLinerChart name="chart-areaspline" style={styles.chartImg}/>
+
+
+</View>
+               
+              <BarChart
+  style={styles.graphStyle}
+  data={data}
+  width={screenWidth}
+  height={220}
+  yAxisLabel="$"
+  chartConfig={chartConfig}
+  verticalLabelRotation={30}
+/>
            </View>
        )
    }       
@@ -140,13 +191,16 @@ export default function TabViewExample() {
   });
  
   return (
+    
     <TabView
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={initialLayout}
-      
+      indicatorStyle={{ backgroundColor: 'white' }}
+      indicatorContainerStyle={{ backgroundColor: 'pink' }}
     />
+    
   );
 }
  
@@ -166,6 +220,22 @@ flexDirection:"row",
 fontSize:18,
 justifyContent:"space-between",
 paddingHorizontal:"4%"
+},
+getcustomsText:{
+    fontSize:20,
+    fontFamily:"Roboto"
+},
+chartHeader:{
+    flexDirection:"row",
+    paddingVertical:"5%",
+    marginLeft:"10%",
+},
+chartImg:{
+//paddingHorizontal:"7%",
+   // width:"80%",
+   
+
+    height:"80%"
 },
 text:{
     fontSize:20,
@@ -190,4 +260,8 @@ item: {
     paddingHorizontal:"5%",
     padding:"2%"
 },
+graphStyle:{
+
+    backgroundColor:"black"
+}
 });
