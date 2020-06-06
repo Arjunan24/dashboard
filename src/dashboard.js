@@ -44,43 +44,48 @@ function Dashboard () {
         date:"2020/06/07",
         price:"-R22.3"
        },
+       {
+        electricityNumber:"ElONO62679",
+        date:"2020/01/07",
+        price:"-R25.3"
+       },
+       {
+        electricityNumber:"ElONO62679",
+        date:"2020/01/07",
+        price:"-R25.3"
+       },
 ]
     return(
       <View  style={styles.container}>
-         <View>
-         <SafeAreaView >
-      <Text >Electricity</Text>
-      <FlatList
+<View style={styles.headerText}>
+<Text style={styles.text}>Electricity</Text>
+<Text  style={styles.text}>View Consumption</Text>
+</View>
+<ScrollView>
+<FlatList
         data={elecData}
-       
         renderItem={({ item }) => (
         <View  style={styles.item}>
-            <Text>{item.electricityNumber}</Text>
-            <Text>{item.date}</Text>
+            <View>
+            <Text style={styles.elecText}>{item.electricityNumber}</Text>
+            <Text style={styles.dateText}>{item.date}</Text>
+            </View>
+            <View>
+                <Text style={styles.priceText}>{item.price}</Text>
+            </View>
         </View>
         )}
         keyExtractor={item => item.id}
         extraData={"selected"}
       />
-    </SafeAreaView>
-         </View>
-         <View >
-         <SafeAreaView >
-      <Text >View Consumptions</Text>
-      <FlatList
-        data={elecData}
-       
-        renderItem={({ item }) => (
-        <View  style={styles.item}>
-            <Text>{item.electricityNumber}</Text>
-            <Text>{item.date}</Text>
-        </View>
-        )}
-        keyExtractor={item => item.id}
-        extraData={"selected"}
-      />
-    </SafeAreaView>
-         </View>
+    </ScrollView>
+         
+<View style={styles.headerText}>
+    <Text style={styles.elecText}>Total Count</Text>
+        <Text style={styles.priceText}>{"480"}</Text>
+
+</View>
+
         </View>
     )
 
@@ -89,13 +94,39 @@ function Dashboard () {
   const styles = StyleSheet.create({  
     container: {  
         flex: 1,  
-        flexWrap:"wrap",
-        flexDirection:"row"
+        fontSize:22
+        //flexWrap:"wrap",
+        // flexDirection:"row"
     },  
+    headerText:{
+
+flexDirection:"row",
+fontSize:20,
+justifyContent:"space-between",
+paddingHorizontal:"4%"
+    },
+    text:{
+        fontSize:22,
+        fontFamily:"Roboto",
+        paddingHorizontal:4
+    },
+    elecText:{
+fontSize:22,
+fontFamily:"Roboto"
+    },
+    dateText:{
+        fontFamily:"Roboto"
+    },
+    priceText:{
+        fontSize:19,
+        fontFamily:"Roboto"
+    },
     item: {  
-        padding: 10,  
-        fontSize: 18,  
-        height: 44,  
+        flexDirection:"row",
+        fontSize:22,
+        justifyContent:"space-between",
+        paddingHorizontal:"5%",
+        padding:"2%"
     },  
 })  
   export default Dashboard;

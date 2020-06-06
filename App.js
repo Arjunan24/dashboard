@@ -15,11 +15,11 @@ const Tab = createMaterialBottomTabNavigator();
 function MyTabs() {
   
   return (
-    <NavigationContainer>
+    <NavigationContainer style={{backgroundColor:"teal"}}>
     <Tab.Navigator
       initialRouteName="Feed"
       activeColor="#e91e63"
-      style={{ backgroundColor: 'tomato' }}
+      style={{ backgroundColor: 'red' }}
     >
       <Tab.Screen
         name="Feed"
