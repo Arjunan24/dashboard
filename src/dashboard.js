@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React ,{ useState } from 'react';
 import { View,Text, StyleSheet, Dimensions,ScrollView,FlatList } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import {
@@ -12,6 +12,10 @@ import {
 
 import MaterialbarChart from "react-native-vector-icons/AntDesign"
 import MaterialLinerChart from "react-native-vector-icons/MaterialCommunityIcons"
+import DropDownPicker from 'react-native-dropdown-picker';
+import CalendarPicker from 'react-native-calendar-picker';
+
+
 
 const elecData=[
     {
@@ -152,14 +156,63 @@ const SecondRoute = () => {
           };
 
    const ThirdRoute =()=>{
+     const [status,setStatus]= useState( )
+     const [selectedStartDate,setDates]= useState(null)
+     const [selectedEndDate,setEndDates]= useState(null)
+     
+     
+     onDateChange= (date, type)=> {
+      if (type === 'END_DATE') {
+        this.setState({
+          selectedEndDate: date,
+        });
+      } else {
+        this.setState({
+          selectedStartDate: date,
+          selectedEndDate: null,
+        });
+      }
+    }
+    const minDate = new Date(); // Today
+    const maxDate = new Date(2017, 6, 3);
+    const startDate  =  selectedStartDate ? selectedStartDate.toString() : '';
+    const endDate = selectedEndDate ? selectedEndDate.toString() : '';
+
        return(
            <View>
                <Text style={styles.getcustomsText}>Consumption- ELONO62679</Text>
                <View style={styles.chartHeader}>
 <MaterialbarChart name="barschart" style={styles.chartImg}/>
 <MaterialLinerChart name="chart-areaspline" style={styles.chartImg}/>
-
-
+<DropDownPicker
+    items={[
+      {label: 'Daily', value: 'daily'},
+        {label: 'Monthly', value: 'monthly'},
+        {label: 'Yearly', value: 'year'},
+    ]}
+    defaultValue={status}
+    containerStyle={{height: 40}}
+    style={{backgroundColor: '#fafafa'}}
+    dropDownStyle={{backgroundColor: '#fafafa'}}
+    onChangeItem={item => this.setState({
+        status: item.value
+    })}
+/>
+<CalendarPicker
+          startFromMonday={true}
+          allowRangeSelection={true}
+          minDate={minDate}
+          maxDate={maxDate}
+          todayBackgroundColor="#f2e6ff"
+          selectedDayColor="#7300e6"
+          selectedDayTextColor="#FFFFFF"
+          onDateChange={this.onDateChange}
+        />
+ 
+        <View>
+          <Text>SELECTED START DATE:{ startDate }</Text>
+          <Text>SELECTED END DATE:{ endDate }</Text>
+        </View>
 </View>
                
               <BarChart
