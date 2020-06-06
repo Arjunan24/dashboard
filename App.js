@@ -1,85 +1,52 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 
+import 'react-native-gesture-handler';
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-// import 'react-native-gesture-handler';
-import {createAppContainer} from "react-navigation"
+import Dashboard from "./src/dashboard.js" 
+import TopUp from "./src/topup"
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+const Tab = createMaterialBottomTabNavigator();
 
-function Dashboard(){
-  return(
-    <View>
-      <Text>Dashboard</Text>
-      </View>
-  )
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Feed"
+      activeColor="#e91e63"
+      style={{ backgroundColor: 'tomato' }}
+    >
+      <Tab.Screen
+        name="Feed"
+        component={Dashboard}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Notifications"
+        component={TopUp}
+        options={{
+          tabBarLabel: 'Updates',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={TopUp}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
 }
-function TopUp(){
-  return(
-    <View>
-      <Text>Dashboard</Text>
-      </View>
-  )
-}
-function Notification(){
-  return(
-    <View>
-      <Text>Dashboard</Text>
-      </View>
-  )
-}
-function more(){
-  return(
-    <View>
-      <Text>Dashboard</Text>
-      </View>
-  )
-}
 
-const TabNavigator=createMaterialBottomTabNavigator(
-  {
-    Dashboard:{screen:Dashboard},
-    TopUp:{screen:TopUp},
-    Notification:{screen:Notification},
-    more:{screen:more},
-  },
-  {
-    initialRouteName:"Daschboard",
-  activeColor:"#f0edf6",
-  inactiveColor:"#3e2465",
-  barStyle:{ backgroundColor: '#694fad' }
-
-  }
-)
-
-
-const styles = StyleSheet.create({
- createAppContainer:{
-   flex:1,
-   justifyContent:"center",
-   alignItems:"center"
- }
-});
-
-export default createAppContainer(TabNavigator);
+export default MyTabs
