@@ -6,7 +6,7 @@ import TopUp from "./src/topup"
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialDashboard from 'react-native-vector-icons/MaterialIcons'
-import MaterialTopUp from 'react-native-vector-icons/AntDesign'
+import MaterialTopUp from 'react-native-vector-icons/EvilIcons'
 import MaterialMore from "react-native-vector-icons/Feather"
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,14 +15,16 @@ const Tab = createMaterialBottomTabNavigator();
 function MyTabs() {
   
   return (
-    <NavigationContainer style={{backgroundColor:"teal"}}>
+    <NavigationContainer>
     <Tab.Navigator
-      initialRouteName="Feed"
-      activeColor="#e91e63"
-      style={{ backgroundColor: 'red' }}
+      initialRouteName="dashboard"
+      activeColor="white"
+      inactiveColor="black"
+     // style={{ background: 'red' }}
+     barStyle={{backgroundColor:"teal"}}
     >
       <Tab.Screen
-        name="Feed"
+        name="dashboard"
         component={Dashboard}
         options={{
           tabBarLabel: 'Dashboard',
@@ -37,7 +39,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Top Up',
           tabBarIcon: ({ color }) => (
-            <MaterialTopUp name="pluscircleo" color={color} size={26} />
+            <MaterialTopUp name="plus" color={color} size={28} />
           ),
         }}
       />
@@ -48,7 +50,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Notification',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="notifications" color={color} size={26} />
+            <MaterialCommunityIcons name="notifications" color={color} size={28} />
           ),
         }}
       />
@@ -58,7 +60,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'more',
           tabBarIcon: ({ color }) => (
-            <MaterialMore name="more-horizontal" color={color} size={26} />
+            <MaterialMore name="more-horizontal" color={color} size={28} />
           ),
         }}
       />
