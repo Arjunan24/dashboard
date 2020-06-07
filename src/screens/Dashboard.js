@@ -178,6 +178,7 @@ const ThirdRoute = () => {
           value={status}
           dropDownStyle={{backgroundColor: '#fafafa'}}
           onChangeItem={(item) => setStatus(item.value)}
+          placeholder="Daily"
         />
 
         <DatePicker
@@ -261,11 +262,11 @@ export default function TabViewExample() {
       <View
         style={{
           flex: 0.1,
-          backgroundColor: '#4c756f',
+          backgroundColor: '#004445',
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text style={{fontSize: 18}}>Consumption</Text>
+        <Text style={{fontSize: 18,color:"white"}}>Consumption</Text>
       </View>
       <TabView
         navigationState={{index, routes}}
@@ -297,7 +298,7 @@ const styles = StyleSheet.create({
   },
   tabStyle: {
     //backgroundColor: '#ff7e67',
-    backgroundColor:"#ff6768"
+    backgroundColor:"#4c756f"
   },
   indicator: {
     backgroundColor: 'black',
