@@ -6,14 +6,13 @@ import {
   Image,
   StyleSheet
 } from 'react-native';
-import logo from "./assets/undraw_under_construction_46pa.png"
 
   function TopUp () {
     return(
       <View style={styles.container}>
     
 <Image
-          source={require("./assets/undraw_under_construction_46pa.png")}
+          source={require("../assets/undraw_under_construction_46pa.png")}
           style={styles.image}
         />
         <Text style={styles.text}>Under Construction...</Text>
@@ -32,7 +31,7 @@ alignItems:"center"
       },
     image: {
         //flex:1,
-        width: '90%',
+        width: '95%',
         height: '80%',
        // padding:"5%",
        // paddingHorizontal:
