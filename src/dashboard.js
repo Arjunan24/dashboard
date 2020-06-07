@@ -1,6 +1,6 @@
 import React ,{ useState } from 'react';
 import { View,Text, StyleSheet, Dimensions,ScrollView,FlatList } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import { TabView,TabBar, SceneMap } from 'react-native-tab-view';
 import {
     LineChart,
     BarChart,
@@ -13,7 +13,9 @@ import {
 import MaterialbarChart from "react-native-vector-icons/AntDesign"
 import MaterialLinerChart from "react-native-vector-icons/MaterialCommunityIcons"
 import DropDownPicker from 'react-native-dropdown-picker';
-import CalendarPicker from 'react-native-calendar-picker';
+import DatePicker from 'react-native-datepicker'
+
+
 
 
 
@@ -156,28 +158,10 @@ const SecondRoute = () => {
           };
 
    const ThirdRoute =()=>{
-     const [status,setStatus]= useState( )
-     const [selectedStartDate,setDates]= useState(null)
-     const [selectedEndDate,setEndDates]= useState(null)
-     
-     
-     onDateChange= (date, type)=> {
-      if (type === 'END_DATE') {
-        this.setState({
-          selectedEndDate: date,
-        });
-      } else {
-        this.setState({
-          selectedStartDate: date,
-          selectedEndDate: null,
-        });
-      }
-    }
-    const minDate = new Date(); // Today
-    const maxDate = new Date(2017, 6, 3);
-    const startDate  =  selectedStartDate ? selectedStartDate.toString() : '';
-    const endDate = selectedEndDate ? selectedEndDate.toString() : '';
-
+     const [status,setStatus]= useState( ) 
+     const [date,setDate]= useState("2016-05-15" ) 
+     const [endDate,setEndDate]= useState("2016-05-15" ) 
+    
        return(
            <View>
                <Text style={styles.getcustomsText}>Consumption- ELONO62679</Text>
@@ -191,35 +175,72 @@ const SecondRoute = () => {
         {label: 'Yearly', value: 'year'},
     ]}
     defaultValue={status}
-    containerStyle={{height: 40}}
-    style={{backgroundColor: '#fafafa'}}
+    containerStyle={{height: 30,width:"30%"}}
+    style={styles.dropDown}
+    value={status}
     dropDownStyle={{backgroundColor: '#fafafa'}}
-    onChangeItem={item => this.setState({
+    onChangeItem={item => setStatus({
         status: item.value
     })}
 />
-<CalendarPicker
-          startFromMonday={true}
-          allowRangeSelection={true}
-          minDate={minDate}
-          maxDate={maxDate}
-          todayBackgroundColor="#f2e6ff"
-          selectedDayColor="#7300e6"
-          selectedDayTextColor="#FFFFFF"
-          onDateChange={this.onDateChange}
-        />
- 
-        <View>
-          <Text>SELECTED START DATE:{ startDate }</Text>
-          <Text>SELECTED END DATE:{ endDate }</Text>
-        </View>
+
+<DatePicker
+        style={{width: "30%"}}
+        date={date}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="2016-05-01"
+        maxDate= "2030-05-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(date) => setDate({date: date})}
+      />
+      <DatePicker
+        style={{width: "30%"}}
+        date={endDate}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="2016-05-01"
+        maxDate= "2030-05-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(date) => {this.setState({endDate: date})}}
+      />
+
+
 </View>
                
               <BarChart
   style={styles.graphStyle}
   data={data}
   width={screenWidth}
-  height={220}
+  height={300}
   yAxisLabel="$"
   chartConfig={chartConfig}
   verticalLabelRotation={30}
@@ -250,8 +271,26 @@ export default function TabViewExample() {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={initialLayout}
-      indicatorStyle={{ backgroundColor: 'white' }}
-      indicatorContainerStyle={{ backgroundColor: 'pink' }}
+       indicatorStyle={{ backgroundColor: 'black' }}
+       indicatorContainerStyle={{ backgroundColor: 'pink' }}
+//       barStyle={{backgroundColor:"red"}}
+//       tabBarOptions={
+// style={backgroundColor:"red"}
+//       }
+//       tabStyle={
+//         style={backgroundColor:"red"}
+//       }
+renderTabBar={props => (
+  <TabBar
+    {...props}
+    renderLabel={this._renderLabel}
+    getLabelText={({ route: { title } }) => title}
+    indicatorStyle={styles.indicator}
+    tabStyle={styles.tabStyle}
+    style={styles.tab}
+  />
+)}
+      
     />
     
   );
@@ -260,7 +299,19 @@ export default function TabViewExample() {
 const styles = StyleSheet.create({
   scene: {
     flex: 0.5,
+    
   },
+  tab:{
+    backgroundColor:"green"
+  },
+  tabStyle:{
+    backgroundColor:"#127681"
+    //backgroundColor:"#dfcdc3"
+  },
+  indicator:{
+    backgroundColor:"black"
+  },
+  dropDown:{backgroundColor: '#fafafa',marginTop:"3%"},
   container: {  
     flex: 1,  
     fontSize:22
@@ -276,18 +327,20 @@ paddingHorizontal:"4%"
 },
 getcustomsText:{
     fontSize:20,
-    fontFamily:"Roboto"
+    fontFamily:"Roboto",
+    paddingVertical:"2%",
+    paddingHorizontal:"1%"
 },
 chartHeader:{
     flexDirection:"row",
     paddingVertical:"5%",
-    marginLeft:"10%",
+    marginLeft:"1%",
 },
 chartImg:{
-//paddingHorizontal:"7%",
+//paddingHorizontal:"1%",
    // width:"80%",
    
-
+marginTop:"3%",
     height:"80%"
 },
 text:{

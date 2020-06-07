@@ -21,7 +21,7 @@ function MyTabs() {
       activeColor="white"
       inactiveColor="black"
      // style={{ background: 'red' }}
-     barStyle={{backgroundColor:"teal"}}
+     barStyle={{backgroundColor:"#004445"}}
     >
       <Tab.Screen
         name="dashboard"
