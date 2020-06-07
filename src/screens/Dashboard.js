@@ -267,6 +267,7 @@ export default function TabViewExample() {
           alignItems: 'center',
         }}>
         <Text style={{fontSize: 18,color:"white"}}>Consumption</Text>
+        
       </View>
       <TabView
         navigationState={{index, routes}}
